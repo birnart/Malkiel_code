@@ -20,5 +20,11 @@ def stock_picks():
   return stockerinos
 
 
-print(stock_picks())
+def dict_stocks():
+  stocklys = stock_picks()
+  for i in range(1,5):
+    print("For Group", i,":", stocklys)
+  return
+
+dict_stocks()
 
