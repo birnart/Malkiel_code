@@ -1,58 +1,27 @@
 require 'json'
 require 'open-uri'
-
-# def variables
-stock_picks_a = []
-stock_picks_b = []
-stock_picks_c = []
-stock_picks_d = []
-
-# scrape all securities available
-url = "https://raw.githubusercontent.com/RayBB/random-stock-picker/master/stocks.json"
-tickers = open(url).read
-tickers_p = JSON.parse(tickers)
-
+# scrape all securities available => FIND A BETTER HASH TO DO META ANAYLSIS
+# url = "https://raw.githubusercontent.com/RayBB/random-stock-picker/master/stocks.json"
+# tickers = open(url).read
+# tickers_p = JSON.parse(tickers).shuffle
+all_tickers = JSON.parse(open("https://raw.githubusercontent.com/RayBB/random-stock-picker/master/stocks.json").read).shuffle
+# input
+puts "how many groups are you working in? (integer input only)"
+group_num = gets.chomp.to_i
+puts "how many option do you want per group? (integer input only)"
+pick_num = gets.chomp.to_i
 # random selection
-20.times do
-  pick = tickers_p.sample
-  stock_picks_a << pick
-  pick_ind = tickers_p.find_index(pick)
-  tickers_p.delete_at(pick_ind)
+i = 1
+4.times do
+  selection = []
+  20.times do
+    pick = all_tickers.sample
+    selection << pick
+    all_tickers.delete_at(all_tickers.find_index(pick))
+  end
+  # output
+  puts ""
+  puts "For group #{i} the securities to analyse are:"
+  puts selection
+  i += 1
 end
-20.times do
-  pick = tickers_p.sample
-  stock_picks_b << pick
-  pick_ind = tickers_p.find_index(pick)
-  tickers_p.delete_at(pick_ind)
-end
-20.times do
-  pick = tickers_p.sample
-  stock_picks_c << pick
-  pick_ind = tickers_p.find_index(pick)
-  tickers_p.delete_at(pick_ind)
-end
-20.times do
-  pick = tickers_p.sample
-  stock_picks_d << pick
-  pick_ind = tickers_p.find_index(pick)
-  tickers_p.delete_at(pick_ind)
-end
-
-# final output
-puts "For group a the stock pics to analyse are:"
-puts stock_picks_a
-
-puts ""
-
-puts "For group b the stock pics to analyse are:"
-puts stock_picks_b
-
-puts ""
-
-puts "For group c the stock pics to analyse are:"
-puts stock_picks_c
-
-puts ""
-
-puts "For group d the stock pics to analyse are:"
-puts stock_picks_d
