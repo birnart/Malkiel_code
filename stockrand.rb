@@ -12,9 +12,9 @@ puts "how many option do you want per group? (integer input only)"
 pick_num = gets.chomp.to_i
 # random selection
 i = 1
-group_num.times do
+4.times do
   selection = []
-  pick_num.times do
+  20.times do
     pick = all_tickers.sample
     selection << pick
     all_tickers.delete_at(all_tickers.find_index(pick))
